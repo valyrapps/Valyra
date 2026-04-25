@@ -1,17 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login - Valyra</title>
+  <title>Valyra Access</title>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* Fondo moderno */
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .card {
+      width: 360px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #4f8cff;
+      box-shadow: 0 0 0 3px rgba(79,140,255,0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4f8cff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #3b76e0;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align:center; margin-top:100px;">
 
-<h2>Acceso a Mathis</h2>
+<body>
 
-<input type="email" id="email" placeholder="Email"><br><br>
-<input type="password" id="password" placeholder="Password"><br><br>
+<div class="card">
+  <div class="title">Valyra</div>
+  <div class="subtitle">Acceso privado a Mathis AI</div>
 
-<button onclick="login()">Entrar</button>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="login()">Entrar</button>
+
+  <div class="footer">Sistema seguro de acceso</div>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
@@ -26,7 +106,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.login = function() {
+window.login = function () {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
