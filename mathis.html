@@ -37,7 +37,7 @@
 		   HEADER MODERNO Y UNIFICADO
 		========================= */
 		.app-header {
-			height: 64px;
+			height: 70px;
 			background: rgba(17, 24, 39, 0.95);
 			backdrop-filter: blur(10px);
 			display: flex;
@@ -51,20 +51,19 @@
 		.header-left {
 			display: flex;
 			align-items: center;
-			gap: 16px;
 			flex: 1;
 		}
 
-		/* Botón Volver unificado */
+		/* Botón Volver - Estilo base */
 		.back-btn {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
+			justify-content: center;
 			text-decoration: none;
 			color: #e0e7ff;
 			font-size: 14px;
 			font-weight: 500;
-			padding: 8px 16px;
+			padding: 8px 20px;
 			border-radius: 10px;
 			background: rgba(255, 255, 255, 0.05);
 			border: 1px solid rgba(255, 255, 255, 0.1);
@@ -83,39 +82,21 @@
 			transform: translateY(0);
 		}
 
-		/* Título central con estilo premium */
+		/* Título centrado - Una línea más grande */
 		.app-title {
 			text-align: center;
 			flex: 2;
 		}
 
 		.app-title h2 {
-			font-size: 20px;
+			font-size: 22px;
 			font-weight: 700;
 			background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
 			background-clip: text;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
-			margin-bottom: 4px;
 			letter-spacing: -0.3px;
-		}
-
-		.app-title .subtitle {
-			font-size: 12px;
-			color: rgba(255, 255, 255, 0.6);
-			font-weight: 500;
-			letter-spacing: 0.3px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 6px;
-		}
-
-		.app-title .subtitle::before,
-		.app-title .subtitle::after {
-			content: "•";
-			color: #3b82f6;
-			font-size: 10px;
+			white-space: nowrap;
 		}
 
 		.header-right {
@@ -125,15 +106,15 @@
 			flex: 1;
 		}
 
-		/* Botón Salir unificado (mismo estilo que Volver) */
+		/* Botón Salir - MISMO ESTILO que Volver */
 		.logout-btn {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			background: rgba(239, 68, 68, 0.15);
-			color: #fca5a5;
-			border: 1px solid rgba(239, 68, 68, 0.3);
-			padding: 8px 18px;
+			justify-content: center;
+			background: rgba(255, 255, 255, 0.05);
+			color: #e0e7ff;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			padding: 8px 20px;
 			border-radius: 10px;
 			font-size: 14px;
 			font-weight: 500;
@@ -143,19 +124,14 @@
 		}
 
 		.logout-btn:hover {
-			background: rgba(239, 68, 68, 0.25);
-			border-color: rgba(239, 68, 68, 0.5);
+			background: rgba(255, 255, 255, 0.12);
+			border-color: rgba(255, 255, 255, 0.2);
 			color: #ffffff;
 			transform: translateY(-1px);
 		}
 
 		.logout-btn:active {
 			transform: translateY(0);
-		}
-
-		/* Iconos dentro de los botones */
-		.btn-icon {
-			font-size: 16px;
 		}
 
 		/* =========================
@@ -195,40 +171,29 @@
 		/* Mobile responsive */
 		@media (max-width: 768px) {
 			.app-header {
-				height: 58px;
+				height: 60px;
 				padding: 0 16px;
 			}
 
 			.back-btn, .logout-btn {
-				padding: 6px 12px;
+				padding: 6px 16px;
 				font-size: 12px;
 			}
 
 			.app-title h2 {
 				font-size: 16px;
 			}
-
-			.app-title .subtitle {
-				font-size: 10px;
-			}
-
-			.btn-icon {
-				font-size: 14px;
-			}
 		}
 
 		/* Para pantallas muy pequeñas */
 		@media (max-width: 480px) {
-			.header-left {
-				flex: 1.5;
+			.app-title h2 {
+				font-size: 14px;
 			}
 			
-			.back-btn span:not(.btn-icon) {
-				display: none;
-			}
-			
-			.back-btn .btn-icon {
-				margin: 0;
+			.back-btn, .logout-btn {
+				padding: 5px 12px;
+				font-size: 11px;
 			}
 		}
 	</style>
@@ -244,22 +209,15 @@
 				<div class="app-header">
 
 					<div class="header-left">
-						<a href="index.html" class="back-btn">
-							<span class="btn-icon">←</span>
-							<span>Volver</span>
-						</a>
+						<a href="index.html" class="back-btn">Volver</a>
 					</div>
 
 					<div class="app-title">
-						<h2>Mathis</h2>
-						<div class="subtitle">Tutor de Tesis IA</div>
+						<h2>Mathis - Tutor de Tesis</h2>
 					</div>
 
 					<div class="header-right">
-						<button id="logoutBtn" class="logout-btn">
-							<span class="btn-icon">→</span>
-							<span>Salir</span>
-						</button>
+						<button id="logoutBtn" class="logout-btn">Salir</button>
 					</div>
 
 				</div>
@@ -268,7 +226,7 @@
 				<div class="chat-container">
 					<iframe
 						src="https://www.chatbase.co/chatbot-iframe/fHBitF-MrYQ48IQOxGrxL"
-						title="Mathis - Tutor de Tesis IA"
+						title="Mathis - Tutor de Tesis"
 						allow="clipboard-write">
 					</iframe>
 				</div>
@@ -298,18 +256,15 @@
 			}
 		});
 
-		// LOGOUT CON CONFIRMACIÓN OPCIONAL
+		// LOGOUT
 		const logoutBtn = document.getElementById("logoutBtn");
 		if (logoutBtn) {
 			logoutBtn.addEventListener("click", () => {
-				// Confirmación opcional (descomentar si quieres)
-				// if (confirm("¿Estás seguro de que quieres salir?")) {
-					signOut(auth).then(() => {
-						window.location.href = "login.html";
-					}).catch((error) => {
-						console.error("Error al cerrar sesión:", error);
-					});
-				// }
+				signOut(auth).then(() => {
+					window.location.href = "login.html";
+				}).catch((error) => {
+					console.error("Error al cerrar sesión:", error);
+				});
 			});
 		}
 	</script>
