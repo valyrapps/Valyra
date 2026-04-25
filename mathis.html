@@ -14,57 +14,40 @@
 			padding: 0;
 			box-sizing: border-box;
 		}
-		
+
 		html, body {
 			height: 100%;
 			width: 100%;
-			background: #ffffff;
+			background: #0b1220;
 			overflow: hidden;
+			font-family: Arial, sans-serif;
 		}
 
-		#header,
-		#menu,
-		.bg,
-		#wrapper > header:not(.app-header) {
-			display: none !important;
-		}
-
-		#wrapper {
-			height: 100%;
-			width: 100%;
-			position: relative;
-		}
-
-		#main {
+		#wrapper, #main, #main .inner {
 			height: 100%;
 			width: 100%;
 		}
 
 		#main .inner {
-			height: 100%;
-			width: 100%;
 			display: flex;
 			flex-direction: column;
 		}
 
+		/* =========================
+		   HEADER MODERNO
+		========================= */
 		.app-header {
-			height: 56px;
-			background: #ffffff;
+			height: 60px;
+			background: #111827;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 0 20px;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-			border-bottom: 1px solid #eef2f6;
+			padding: 0 18px;
+			border-bottom: 1px solid rgba(255,255,255,0.08);
+			box-shadow: 0 4px 18px rgba(0,0,0,0.35);
 		}
 
-		.app-header h2 {
-			font-size: 16px;
-			color: #1F2937;
-			font-weight: 600;
-		}
-
-		.left-actions {
+		.header-left {
 			display: flex;
 			align-items: center;
 			gap: 12px;
@@ -72,9 +55,40 @@
 
 		.back-btn {
 			text-decoration: none;
-			color: #4F8CFF;
+			color: #93c5fd;
+			font-size: 13px;
+			font-weight: 500;
+			padding: 6px 10px;
+			border-radius: 8px;
+			transition: 0.2s;
+		}
+
+		.back-btn:hover {
+			background: rgba(255,255,255,0.08);
+			color: #ffffff;
+		}
+
+		.app-title {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.1;
+		}
+
+		.app-title h2 {
+			font-size: 15px;
+			color: #ffffff;
 			font-weight: 600;
-			font-size: 14px;
+		}
+
+		.app-title span {
+			font-size: 11px;
+			color: rgba(255,255,255,0.6);
+		}
+
+		.header-right {
+			display: flex;
+			align-items: center;
+			gap: 10px;
 		}
 
 		.logout-btn {
@@ -85,15 +99,20 @@
 			border-radius: 8px;
 			font-size: 12px;
 			cursor: pointer;
+			transition: 0.2s;
 		}
 
 		.logout-btn:hover {
 			background: #dc2626;
 		}
 
+		/* =========================
+		   CHAT FULL SCREEN
+		========================= */
 		.chat-container {
 			flex: 1;
 			position: relative;
+			background: #0b1220;
 		}
 
 		.chat-container iframe {
@@ -105,33 +124,43 @@
 			left: 0;
 		}
 
+		/* Mobile */
 		@media (max-width: 768px) {
 			.app-header {
-				height: 50px;
-				padding: 0 15px;
+				height: 52px;
+				padding: 0 12px;
 			}
 		}
 	</style>
 </head>
 
 <body class="is-preload">
+
 	<div id="wrapper">
 		<div id="main">
 			<div class="inner">
 
 				<!-- HEADER -->
 				<div class="app-header">
-					<div class="left-actions">
+
+					<div class="header-left">
 						<a href="index.html" class="back-btn">← Volver</a>
+					</div>
+
+					<div class="app-title">
+						<h2>Mathis</h2>
+						<span>Tutor de tesis IA</span>
+					</div>
+
+					<div class="header-right">
 						<button id="logoutBtn" class="logout-btn">Salir</button>
 					</div>
 
-					<h2>Mathis — Tutor de Tesis</h2>
 				</div>
 
 				<!-- CHAT -->
 				<div class="chat-container">
-					<iframe 
+					<iframe
 						src="https://www.chatbase.co/chatbot-iframe/fHBitF-MrYQ48IQOxGrxL"
 						title="Mathis"
 						allow="clipboard-write">
@@ -142,7 +171,7 @@
 		</div>
 	</div>
 
-	<!-- FIREBASE AUTH -->
+	<!-- FIREBASE -->
 	<script type="module">
 		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 		import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
@@ -156,14 +185,14 @@
 		const app = initializeApp(firebaseConfig);
 		const auth = getAuth(app);
 
-		// 🔒 PROTECCIÓN
+		// PROTECCIÓN
 		onAuthStateChanged(auth, (user) => {
 			if (!user) {
 				window.location.href = "login.html";
 			}
 		});
 
-		// 🚪 LOGOUT
+		// LOGOUT
 		document.getElementById("logoutBtn").addEventListener("click", () => {
 			signOut(auth).then(() => {
 				window.location.href = "login.html";
