@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Mathis - Valyra</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	<style>
+		/* Reset completo para eliminar espacios */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		html, body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			background: #ffffff; /* Fondo blanco que combina con la mayoría de agentes */
+			overflow: hidden;
+		}
+
+		/* Ocultar elementos no deseados */
+		#header,
+		#menu,
+		.bg,
+		#wrapper > header:not(.app-header) {
+			display: none !important;
+		}
+
+		#wrapper {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			position: relative;
+		}
+
+		#main {
+			padding: 0 !important;
+			margin: 0 !important;
+			height: 100%;
+			width: 100%;
+			position: relative;
+		}
+
+		#main .inner {
+			padding: 0 !important;
+			margin: 0 !important;
+			max-width: 100% !important;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Header tipo app - compacto */
+		.app-header {
+			height: 56px;
+			background: #ffffff;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+			flex-shrink: 0;
+			position: relative;
+			z-index: 10;
+			border-bottom: 1px solid #eef2f6;
+		}
+
+		.app-header h2 {
+			margin: 0;
+			font-size: 16px;
+			color: #1F2937;
+			font-weight: 600;
+		}
+
+		.back-btn {
+			text-decoration: none;
+			color: #4F8CFF;
+			font-weight: 600;
+			font-size: 14px;
+		}
+
+		.back-btn:hover {
+			text-decoration: underline;
+		}
+
+		/* Chat container - ocupa todo el espacio restante */
+		.chat-container {
+			flex: 1;
+			min-height: 0;
+			width: 100%;
+			position: relative;
+			background: #ffffff; /* Fondo blanco puro */
+		}
+
+		.chat-container iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+		
+		/* Asegurar que no haya márgenes heredados */
+		.inner, .inner * {
+			max-width: none !important;
+		}
+		
+		/* Responsive para móviles */
+		@media (max-width: 768px) {
+			.app-header {
+				height: 50px;
+				padding: 0 15px;
+			}
+			
+			.app-header h2 {
+				font-size: 14px;
+			}
+		}
+	</style>
+</head>
+
+<body class="is-preload">
+	<div id="wrapper">
+		<!-- Main - contenido principal -->
+		<div id="main">
+			<div class="inner">
+				<!-- Header app compacto -->
+				<div class="app-header">
+					<a href="index.html" class="back-btn">← Volver</a>
+					<h2>Mathis — Tutor de Tesis</h2>
+				</div>
+
+				<!-- Contenedor del chat -->
+				<div class="chat-container">
+					<iframe 
+						src="https://www.chatbase.co/chatbot-iframe/fHBitF-MrYQ48IQOxGrxL"
+						title="Mathis - Tutor de Tesis"
+						allow="clipboard-write"
+						frameborder="0"
+						scrolling="auto">
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts necesarios (opcionales, puedes quitarlos si no los usas) -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>
