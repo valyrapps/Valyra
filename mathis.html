@@ -9,7 +9,6 @@
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 	<style>
-		/* Reset completo para eliminar espacios */
 		* {
 			margin: 0;
 			padding: 0;
@@ -17,15 +16,12 @@
 		}
 		
 		html, body {
-			margin: 0;
-			padding: 0;
 			height: 100%;
 			width: 100%;
-			background: #ffffff; /* Fondo blanco que combina con la mayoría de agentes */
+			background: #ffffff;
 			overflow: hidden;
 		}
 
-		/* Ocultar elementos no deseados */
 		#header,
 		#menu,
 		.bg,
@@ -36,30 +32,21 @@
 		#wrapper {
 			height: 100%;
 			width: 100%;
-			margin: 0;
-			padding: 0;
 			position: relative;
 		}
 
 		#main {
-			padding: 0 !important;
-			margin: 0 !important;
 			height: 100%;
 			width: 100%;
-			position: relative;
 		}
 
 		#main .inner {
-			padding: 0 !important;
-			margin: 0 !important;
-			max-width: 100% !important;
 			height: 100%;
 			width: 100%;
 			display: flex;
 			flex-direction: column;
 		}
 
-		/* Header tipo app - compacto */
 		.app-header {
 			height: 56px;
 			background: #ffffff;
@@ -68,17 +55,19 @@
 			justify-content: space-between;
 			padding: 0 20px;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-			flex-shrink: 0;
-			position: relative;
-			z-index: 10;
 			border-bottom: 1px solid #eef2f6;
 		}
 
 		.app-header h2 {
-			margin: 0;
 			font-size: 16px;
 			color: #1F2937;
 			font-weight: 600;
+		}
+
+		.left-actions {
+			display: flex;
+			align-items: center;
+			gap: 12px;
 		}
 
 		.back-btn {
@@ -88,45 +77,38 @@
 			font-size: 14px;
 		}
 
-		.back-btn:hover {
-			text-decoration: underline;
+		.logout-btn {
+			background: #ef4444;
+			color: white;
+			border: none;
+			padding: 6px 10px;
+			border-radius: 8px;
+			font-size: 12px;
+			cursor: pointer;
 		}
 
-		/* Chat container - ocupa todo el espacio restante */
+		.logout-btn:hover {
+			background: #dc2626;
+		}
+
 		.chat-container {
 			flex: 1;
-			min-height: 0;
-			width: 100%;
 			position: relative;
-			background: #ffffff; /* Fondo blanco puro */
 		}
 
 		.chat-container iframe {
 			width: 100%;
 			height: 100%;
 			border: none;
-			display: block;
 			position: absolute;
 			top: 0;
 			left: 0;
-			right: 0;
-			bottom: 0;
 		}
-		
-		/* Asegurar que no haya márgenes heredados */
-		.inner, .inner * {
-			max-width: none !important;
-		}
-		
-		/* Responsive para móviles */
+
 		@media (max-width: 768px) {
 			.app-header {
 				height: 50px;
 				padding: 0 15px;
-			}
-			
-			.app-header h2 {
-				font-size: 14px;
 			}
 		}
 	</style>
@@ -134,54 +116,60 @@
 
 <body class="is-preload">
 	<div id="wrapper">
-		<!-- Main - contenido principal -->
 		<div id="main">
 			<div class="inner">
-				<!-- Header app compacto -->
+
+				<!-- HEADER -->
 				<div class="app-header">
-					<a href="index.html" class="back-btn">← Volver</a>
+					<div class="left-actions">
+						<a href="index.html" class="back-btn">← Volver</a>
+						<button id="logoutBtn" class="logout-btn">Salir</button>
+					</div>
+
 					<h2>Mathis — Tutor de Tesis</h2>
 				</div>
 
-				<!-- Contenedor del chat -->
+				<!-- CHAT -->
 				<div class="chat-container">
 					<iframe 
 						src="https://www.chatbase.co/chatbot-iframe/fHBitF-MrYQ48IQOxGrxL"
-						title="Mathis - Tutor de Tesis"
-						allow="clipboard-write"
-						frameborder="0"
-						scrolling="auto">
+						title="Mathis"
+						allow="clipboard-write">
 					</iframe>
 				</div>
+
 			</div>
 		</div>
 	</div>
 
-	<!-- Scripts necesarios (opcionales, puedes quitarlos si no los usas) -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+	<!-- FIREBASE AUTH -->
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+		import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAwtQL1VC-Lk9vnamjFc-g6GA9rvT6LvUo",
-    authDomain: "valyra-mathis.firebaseapp.com",
-    projectId: "valyra-mathis",
-  };
+		const firebaseConfig = {
+			apiKey: "AIzaSyAwtQL1VC-Lk9vnamjFc-g6GA9rvT6LvUo",
+			authDomain: "valyra-mathis.firebaseapp.com",
+			projectId: "valyra-mathis",
+		};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+		const app = initializeApp(firebaseConfig);
+		const auth = getAuth(app);
 
-  // BLOQUEO DE ACCESO
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-    }
-  });
-</script>
+		// 🔒 PROTECCIÓN
+		onAuthStateChanged(auth, (user) => {
+			if (!user) {
+				window.location.href = "login.html";
+			}
+		});
+
+		// 🚪 LOGOUT
+		document.getElementById("logoutBtn").addEventListener("click", () => {
+			signOut(auth).then(() => {
+				window.location.href = "login.html";
+			});
+		});
+	</script>
+
 </body>
 </html>
