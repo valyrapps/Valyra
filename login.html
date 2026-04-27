@@ -95,7 +95,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAwtQL1VC-Lk9vnamjFc-g6GA9rvT6LvUo",
@@ -106,17 +106,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.login = function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+// AUTO-REDIRECT SI YA ESTÁ LOGUEADO
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "mathis.html";
+  }
+});
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      window.location.href = "mathis.html";
-    })
-    .catch(error => {
-      alert("Error: " + error.message);
-    });
+//  LOGIN
+window.login = async function () {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("Introduce email y contraseña");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "mathis.html";
+  } catch (error) {
+    console.error(error);
+    alert("Credenciales incorrectas");
+  }
 }
 </script>
 
